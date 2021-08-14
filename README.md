@@ -53,7 +53,6 @@ De même, les résultats sont très satisfaisant, comme l'on peut voir ci-dessou
 
 <p align="center">
   <img src="img/evolution_dilated_reti_dcgan.gif" alt="image1" width="400" style="display:inline-block;"/> <!-- Image à gauche -->
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <p align="center">
     <b>On voit l'évolution du GAN à travers les épochs. A partir d'un certain moment, on distingue bien le contour de l'intérieur du réticulum. La texture est plus ou moins bien reconstituée</b>
