@@ -1,4 +1,4 @@
-# Stage M1 Generative Adversarial Network
+# Stage M1 : Generative Adversarial Network
 
 ## I Introduction
 Ce stage de M1 portait sur les GANs (Generative Adversarial Network). Plus précisément, il s'agissait de se demander si l'augmentation de donnée à l'aide de GAN pour la segmentation d'images biomédicales était pertinente.
@@ -53,32 +53,41 @@ De même, les résultats sont très satisfaisant, comme l'on peut voir ci-dessou
 
 <p align="center">
   <img src="img/evolution_dilated_reti_dcgan.gif" alt="image1" width="400" style="display:inline-block;"/> <!-- Image à gauche -->
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="img/fake_dilat_texture_2.png" alt="image2" width="200" style="display:inline-block;"/> <!-- Image à droite -->
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <p align="center">
-    <b>A gauche on voit l'évolution du GAN à travers les épochs. A droite, échantillon parmi les patchs générés par le GAN : on distingue bien le contour de l'intérieur du réticulum. La texture est plus ou moins bien reconstituée</b>
+    <b>On voit l'évolution du GAN à travers les épochs. A partir d'un certain moment, on distingue bien le contour de l'intérieur du réticulum. La texture est plus ou moins bien reconstituée</b>
 </p>    
 
 
 Mais il fallait réussir à générer des patchs complets, pas seulement avec un reticulum, mais également avec le fond derrière. Nous avons d'abbord bêtements nourri le GAN avec les patchs que vous pouvez voir ci dessous (obtenus avec le script connexe_crop_texture_full_patch.py). Le GAN ne sortait que du bruit, c'était prévisible.
 
-Il fallait donc trouver une solution pour générer un patch complet, reticulum et fond compris. Plusieurs idées sont venus comme la génération séparer du reticulum (ce que l'on savait déjà faire) et d'un fond, pour ensuite les réunir. Mais l'idée que nous avons retenu est celle présentée dans le papier de Pandley et al. (https://www.sciencedirect.com/science/article/abs/pii/S1746809419303635).
+<p align="center"><img src="img/3_text.png" width="200"\></p>
+<p align="center">
+    <b>Patch utilisé pour nourir le GAN et tenter de générer des patchs complets</b>
+</p>    
+
+## IV Implémentation d'un GAN à deux étapes
+
+Il fallait donc trouver une solution pour générer un patch complet, reticulum et fond compris. Plusieurs idées sont venus comme la génération séparer du reticulum (ce que l'on savait déjà faire) et d'un fond, pour ensuite les réunir. 
+Mais l'idée que nous avons retenu est celle présentée dans le papier de Pandley et al. (https://www.sciencedirect.com/science/article/abs/pii/S1746809419303635).
 Pour résumé, son approche consiste à utiliser deux GANs en parallèle, un qui va générer les masques binaires (la vérité terrain), puis un autre qui a l'aide des masques déjà générés, va générer l'image compléte (réticulum avec le fond dans notre cas).
 
 Nous avons donc implémenté l'architecture proposée et avons éssayé de l'entrainer. 
 Le papier manquait de clarté et de précisions à certains endroit, et nous avons préféré utiliser l'architecture DCGAN pour le premier GAN présenté dans le papier. En bref, nous avons un peu adapté à notre façon l'architecture qui n'est donc pas exactement la même que celle présentée dans le papier.
 
 Le fichier contenant ces implémentation se nomme "gan_pandley_tuned.py.
-Le premier GAN fonctionne puisque c'est le même que nous utilision plus haut.
+Le premier GAN fonctionne puisque c'est le même que nous utilisions plus haut.
 
 Quant au Second GAN, nous avons tenter de l'entrainer de mutiples fois, en apportant tantôt des modifications à l'architecture, aux paramètres d'entrainement, en changeant les loss ou bien les optimiseurs. La majorité des fois, le GAN collapsait rapidement. Nous en sommes arrivé à une configuration où le GAN ne collapse plus, mais les loss semblent stagner et le GAN ne semble pas vraiment s'améliorer.
+
+## Conclusion, Pistes pour la suite
 
 Nous n'avons donc pas réussi à l'entrainer, mais nous avons plusieurs pistes de reflexion :
     - Entrainer plus ou moins le Discriminateur ou le Générateur (par exemple entrainer seulement une 1 fois sur 4 le Discriminateur), cette idée est assez fréquemment reprise dans les GANs.
     - Une autre idée serait de baisser la résolution avec laquelle travaille le GAN. Il est réputé que les GANs ne se comportent pas très bien avec une haute résolution d'image. Nous travaillons avec des images de taille 128x128. On peut penser qu'en essayant d'abaisser la résolution en 64x64, cela améliore son comportement (attention, cela nécessite d'adapter l'architecture complète du GAN, et pas seulement la taille des images en entrée).
     
-On peut également noter d'autres idées pour arriver au but souhaité. Les GAUGAN peuvent être un bon moyen pour générer des images complètes, ce serait à creuser. Sinon l'idée de générer un fond séparément du réticulum, pourrait aussi être à creuser.
+On peut également noter d'autres idées pour arriver au but souhaité. Les GAUGAN peuvent être un bon moyen pour générer des images complètes, ce serait à creuser. L'idée de générer un fond séparément du réticulum, pourrait aussi être exploitée.
 
 
 Pour toute question, n'hésitez pas à me contacter à : alexandre.stenger@live.fr
