@@ -1,4 +1,4 @@
-##Stage M1 Generative Adversarial Network
+## Stage M1 Generative Adversarial Network
 
 Ce stage de M1 portait sur les GANs (Generative Adversarial Network). Plus précisément, il s'agissait de se demander si l'augmentation de donnée à l'aide de GAN pour la segmentation d'images biomédicales était pertinente.
 
