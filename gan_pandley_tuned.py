@@ -85,8 +85,8 @@ nc = 1  #nombre de channel (1 = grayscale / 3 = RGB)
 ngf = 64 
 ndf = 64 
 
-num_epoch_stage_1 = 100
-num_epoch_stage_2 = 200
+num_epoch_stage_1 = 100  #Pour le premier GAN, 100 epochs suffisent amplement (avec un dataset d'entrainement de 4000 patchs)
+num_epoch_stage_2 = 200  #Pour le second GAN, je ne sais pas encore quel est le nombre optimal d'épochs
 
 
 ############################################################
@@ -221,17 +221,19 @@ D.apply(weights_init)
 print(G)
 print(D)
 
-BCE_loss = nn.BCELoss()
+BCE_loss = nn.BCELoss() #Loss utilisée
 
 learning_rate = 0.0002
 beta1 = 0.5
 
+#Les deux optimiseurs
 G_optimizer = optim.Adam(G.parameters(), lr=learning_rate, betas=(beta1, 0.999))
 D_optimizer = optim.Adam(D.parameters(), lr=learning_rate, betas=(beta1, 0.999))
 
 real_label = 1
 fake_label = 0 
 
+#Listes qui vont contenir les loss pour affichage à la fin
 G_loss_l = []
 D_loss_l = []
 
