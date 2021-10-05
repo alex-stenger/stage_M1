@@ -35,6 +35,14 @@ Une fois établi ce set de donnée composé d'environ 4500 patchs de réticulums
     <b>A gauche, les vrais patchs de masque binaire, à droite ceux générés</b>
 </p>    
 
+Il est également intéressant de montrer l'évolution de la loss function pendant l'entrainement. On voit clairement le point de bascule autour le la 500ème itération, point à partir duquel le générateur commence à générer autre chose que du bruit, et où la forme générée commence à ressembler à ce que l'on souhaite
+
+<p align="center"><img src="img/loss_G_D.png" width="300"\></p>
+<p align="center">
+    <b>Évolution de la loss durant l'entrainement</b>
+</p>    
+
+
 ## III Génération de patchs avec la texture
 
 La deuxième idée a été de générer des patchs de réticulums, mais cette fois ci "texturés", dans le sens où on souhaitait qu'ils ressemblent à de vrais réticulums. Après plusieurs essais infructueux, nous avons trouvé la bonne façon de nourir le GAN. En quelques mots, on fait de la dilatation morphologique sur les annotations, qui nous servent ensuite à resortir de l'image des patchs de réticulums, mais avec une vue plus large permettant ainsi de distinguer leur contour. On peut voir ci dessous la différence en utilisant et sans utiliser la dilatation. Le script pour faire ces patchs est celui nommé "connexe_crop_dilation.py".
