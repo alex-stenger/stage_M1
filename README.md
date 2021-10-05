@@ -37,7 +37,7 @@ Une fois établi ce set de donnée composé d'environ 4500 patchs de réticulums
 
 Il est également intéressant de montrer l'évolution de la loss function pendant l'entrainement. On voit clairement le point de bascule autour le la 500ème itération, point à partir duquel le générateur commence à générer autre chose que du bruit, et où la forme générée commence à ressembler à ce que l'on souhaite
 
-<p align="center"><img src="img/loss_G_D.png" width="300"\></p>
+<p align="center"><img src="img/loss_G_D.png" width="800"\></p>
 <p align="center">
     <b>Évolution de la loss durant l'entrainement</b>
 </p>    
