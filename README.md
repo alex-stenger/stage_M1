@@ -100,7 +100,7 @@ On peut également noter d'autres idées pour arriver au but souhaité. Les GAUG
 
 Le code est prêt à être réutilisé. Dans tous les fichiers que j'ai déposé se trouve au début des variables contenant le chemin vers les données : c'est ce chemin qu'il faudra modifier pour travailler avec l'un ou l'autre des set de données. Les données sont présentes dans le dossier "data" de ce repo.
 
-Pour toute question, n'hésitez pas à me contacter à : alexandre.stenger@live.fr
+Pour toute question, n'hésitez pas à me contacter à : alstenger@unistra.fr
 
 
 
